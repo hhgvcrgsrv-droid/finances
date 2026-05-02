@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.2">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="fr"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="apple-mobile-web-app-capable" content="yes"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;FinanceScan&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>:root { --ios-blue: #007AFF; --bg: #F2F2F7; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body { font-family: -apple-system, system-ui, sans-serif; background: var(--bg); margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.card { background: white; border-radius: 20px; padding: 30px; width: 85%; max-width: 400px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.btn-scan { background: var(--ios-blue); color: white; padding: 20px; border-radius: 15px; font-size: 18px; font-weight: 600; display: block; cursor: pointer; text-decoration: none; margin-top: 20px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#status { margin-top: 20px; font-size: 14px; color: #666; min-height: 40px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.spinner { display: none; width: 30px; height: 30px; border: 3px solid #f3f3f3; border-top: 3px solid var(--ios-blue); border-radius: 50%; animation: spin 1s linear infinite; margin: 15px auto; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h1 style="margin:0"&gt;FinanceScan&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p style="color:#888"&gt;Capture de factures &amp; payes&lt;/p&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="spinner" class="spinner"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="status"&gt;Prêt pour le scan&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;label for="fileInput" class="btn-scan"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>📷 SCANNER UN DOCUMENT</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;input type="file" id="fileInput" accept="image/*,application/pdf" style="display:none"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// --- CONFIGURATION ---</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby75FGggVs6MvxhP8TWezRHrQ9wfeOKP8aR5DrBcNFXDTHFgPeuNCx4E-9UvoDBbYRN/exec";<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const MA_CLE = « Brocode33! »;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// ---------------------</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.getElementById('fileInput').addEventListener('change', function(e) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const file = e.target.files[0];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!file) return;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const status = document.getElementById('status');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const spinner = document.getElementById('spinner');</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>status.innerText = "Analyse et envoi en cours...";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>status.style.color = "#666";</p>
+<p class="p1"><span class="Apple-converted-space">            </span>spinner.style.display = "block";</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const reader = new FileReader();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>reader.onload = function(event) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const base64Content = event.target.result.split(',')[1];</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const payload = {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>cle: MA_CLE,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>fileContent: base64Content,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>fileName: file.name,</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>mimeType: file.type</p>
+<p class="p1"><span class="Apple-converted-space">                </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>fetch(SCRIPT_URL, {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>method: 'POST',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>mode: 'no-cors', // Important pour Google Apps Script</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>body: JSON.stringify(payload)</p>
+<p class="p1"><span class="Apple-converted-space">                </span>})</p>
+<p class="p1"><span class="Apple-converted-space">                </span>.then(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>status.innerHTML = "&lt;b style='color:#34C759'&gt;✅ RÉUSSI !&lt;/b&gt;&lt;br&gt;Document archivé dans Drive et Sheets.";</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>spinner.style.display = "none";</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>document.getElementById('fileInput').value = ""; // Reset</p>
+<p class="p1"><span class="Apple-converted-space">                </span>})</p>
+<p class="p1"><span class="Apple-converted-space">                </span>.catch(err =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>status.innerHTML = "&lt;b style='color:#FF3B30'&gt;❌ ERREUR&lt;/b&gt;&lt;br&gt;Vérifiez votre connexion.";</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>spinner.style.display = "none";</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>};</p>
+<p class="p1"><span class="Apple-converted-space">            </span>reader.readAsDataURL(file);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
